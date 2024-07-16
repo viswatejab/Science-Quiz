@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Quiz App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../qstyle.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Song+Myung" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+  <style type="text/css">
+   .box {
+   
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   background-color: rgb(19, 6, 167);
+   
+}
+
+p,h3,h2,h4,h5,h1{
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 2em;
+ font-weight:800;
+ 
+}
+
+p{
+ font-size: 18px;
+ color: #84817a;
+}
+
+i{ font-style: bold !important;
+ color:#2C3E50;
+ font-size: 25px !important;
+}
+h5{
+color:#2C3E50;
+}
+
+
+a{
+ color: inherit;
+ text-decoration: none;
+}
+
+.btn{
+  font-family: Arial,Helvetica;
+  background-color: #4bf2f2;
+  color:#262626;
+ border-radius: 8px;
+}
+
+a{
+ color: inherit;
+ text-decoration: none;
+}
+a:hover{
+ color: white;
+ text-decoration: none;
+}
+
+.blue{
+background-color: #0097e6;
+color: white;
+border-radius: 20px;
+}
+
+input{
+ border: 1px solid #2C3E50;
+ padding: 10px;
+ width:50%;
+ border-radius: 20px;
+ text-decoration: none;
+ color: inherit;
+  outline: none;
+}
+button{
+ border: 1px solid #2C3E50;
+ padding: 10px;
+ width:50%;
+ border-radius: 20px;
+ background-color: #40407a;
+ color: white;
+  outline: none;
+}
+
+@media only screen and (max-width: 768px) {
+   /* For mobile phones: */
+   input,button {
+       width: 100%;
+   }
+   
+}
+  </style>
+</head>
+<body>
+    <div class="certificate-box hide ">
+      <body style="background-color: floralwhite;">
+        <div style="padding:1%;text-align: center;">
+          <h2 style="color:#2c2c54;font-size: 50px;font-family: Arial,Helvetica;"><strong>WELCOME TO SCIENCE QUIZ</strong></h2>
+        </div>
+      <div class="container-fluid" id="menu" style="padding-top: 3%;padding-bottom: 2%">
+        <div class="container box" style="max-width:700px;border-radius: 6px">
+       
+          <div id="member" class="container-fluid menu row" style="padding:2%;text-align: center;">
+            <br>
+             <h4>ENTER YOUR DETAILS</h4>
+             <hr style="width: 50%">
+         
+               <input type="Name"  name="member" placeholder="Your Name" id="name" required>
+                <br>
+                
+                <br>
+              <input placeholder="Class" type="number"  max="12" min="3" id="grade" required>
+              <br>
+              <br>
+              <table align="center" cellpadding = "10">
+              <td>Select Number Of Questions</td>
+            <td>
+               <input type="radio" name="Gender" value="25" />
+                  25
+               <input type="radio" name="Gender" value="50" />
+                  50
+              </td>
+            </table>
+              <button onclick="submit()">Get your Certificate</button>
+              <br>
+              <br>
+          </div>
+         </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+        function submit(){
+         console.log("in");
+         var name = document.getElementById('name').value;
+         console.log(name);
+         var grade = document.getElementById('grade').value;
+         localStorage.setItem("name", name);
+         localStorage.setItem("grade", grade);
+          window.location="certificate.html";
+         
+        }
+    </script>
+      
+    <div class="home-box custom-box ">
+        <h3>Instructions:</h3>
+        <p>Total number of questions: <span class="total-question">5</span></p>
+        <p>1. You will have 12.5 minutes to complete the quiz.<br/>
+          2. Once you select your answer, it can't be undone.<br/>
+          3. You can select only one option for each Question.<br/>
+          4. You can't exit from the Quiz while you're playing.<br/>
+          5. You'll get points on the basis of your correct answers</span></p>
+        <button type="button" class="btn" onClick="startQuiz()" style="font-size: x-large;font-weight: 600;">Start Quiz</button>
+    </div>
+    <div class="quiz-box custom-box hide">
+      <h2 class="time-box" style="color:#2B3A40;" align="right"><span id="iTimeShow">Time Remaining: </span><br/><span id='timer' style="font-size:25px;"></span></h2>
+        <div class="question-number">
+         
+        </div>
+        <div class="question-text">
+      
+        </div>
+        <div class="option-container">
+         
+        </div>
+        <div class="next-question-btn">
+            <button type="button" class="btn" onClick="next()" style="font-size: x-large;font-weight: 600;">Next</button>
+        </div>
+        <div class="answers-indicator">
+    
+        </div>
+    </div>
+    <div class="result-box custom-box hide">
+        <h1>Quiz Result</h1>
+        <table>
+            <tr>
+                <td>Total Question</td>
+                <td><span class="total-question"></span></td>
+            </tr>
+            <tr>
+                <td>Attempt</td>
+                <td><span class="total-attempt"></span></td>
+            </tr>
+            <tr>
+                <td>Correct</td>
+                <td><span class="total-correct"></span></td>
+            </tr>
+            <tr>
+                <td>Wrong</td>
+                <td><span class="total-wrong"></span></td>
+            </tr>
+            <tr>
+                <td>Percentage</td>
+                <td><span class="percentage"></span></td>
+            </tr>
+            <tr>
+                <td>Your Total Score</td>
+                <td><span class="total-score"></span></td>
+            </tr>
+        </table>
+        <a href="/index.html"><button type="button" class="btn"id="back">Home
+        <a href="/certificate/indexx.html"><button type="button" class="btn"id="certi">Get Certificate</a>
+     </div>
+<script src="../science quiz.js"></script>
+<script src="/Q25/app.js"></script>
+<footer class="text-center text-white">
+  <!-- Grid container -->
+  <div class="container p-4"></div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center">
+    <img src="/jigyasa.png" style="align-content: center"></a><br />This work is developed by <a href="https://www.nal.res.in/" target="_blank">CSIR-National Aerospace Laboratories</a> and is licensed under a Creative Commons Attribution 4.0 International License</a>
+  <!-- Copyright -->
+</footer>
+</body>
+
+</html>
